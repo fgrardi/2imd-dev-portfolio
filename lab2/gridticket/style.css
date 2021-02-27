@@ -3,6 +3,11 @@ body {
     text-align: center;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
 .uppercase {
     text-transform: uppercase;
 }
