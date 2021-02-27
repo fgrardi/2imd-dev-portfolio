@@ -33,3 +33,19 @@ body {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+@media (min-width: 910px) {
+    .container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .blue {
+        grid-column: 3/4;
+        grid-row: 1/4;
+    }
+
+    .yellow {
+        grid-column: 4/6;
+        grid-row: 2/4;
+    }
+}
