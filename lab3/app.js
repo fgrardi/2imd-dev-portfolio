@@ -6,9 +6,8 @@ class Note {
   
     createElement(title) {
       let newNote = document.createElement("li");
-      newNote.innerHTML = "test";
-      //newNote.addEventListener('click', this.remove.bind(newNote));
-  
+      newNote.innerHTML = app.txtTodo.value;
+      newNote.addEventListener('click', this.remove.bind(newNote));
       return newNote;
     }
   
