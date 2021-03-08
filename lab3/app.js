@@ -27,15 +27,17 @@ class Note {
     remove() {
       // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
       // in this function, 'this' will refer to the current note element
-      // .removeChild(this)
+      this.parentNode.removeChild(this);
       // remove the item from screen and from localstorage
+      console.log("remove")
     }
   }
-  
+
   class App {
+    notes = [];
+
     constructor() {
       console.log("👊🏼 The Constructor!");
-  
       // HINT🤩
       // pressing the enter key in the text field triggers the createNote function
       this.txtTodo = document.querySelector("#taskInput");
@@ -43,20 +45,25 @@ class Note {
 
       // read up on .bind() -> we need to pass the current meaning of this to the eventListener
       // when the app loads, we can show previously saved noted from localstorage
-      // this.loadNotesFromStorage();
+      this.loadNotesFromStorage();
     }
   
     loadNotesFromStorage() {
       // HINT🤩
       // load all notes from storage here and add them to the screen
+      if (localStorage.getItem("notes") !== null) {
+        notes = JSON.parse(localStorage.getItem("notes")) //fill array
+      }
     }
   
     createNote(e) {
-      // this function should create a new note by using the Note() class
-      const note = new Note();
 
       // if (e.key === "Enter")
       if(e.key === "Enter"){
+        // this function should create a new note by using the Note() class
+        const note = new Note();
+        this.notes.push(note); //push note to array
+
         console.log(this.txtTodo.value);
         note.add(); // note.add();
         this.reset(); // clear the text field with .reset in this class
