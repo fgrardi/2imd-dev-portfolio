@@ -58,19 +58,16 @@ class Note {
       // if (e.key === "Enter")
       if(e.key === "Enter"){
         console.log(this.txtTodo.value);
-        note.add();
+        note.add(); // note.add();
+        this.reset(); // clear the text field with .reset in this class
+        // note.saveToStorage();
         e.preventDefault();
-      }
-
-      // HINT🤩
-      // note.add();
-      // note.saveToStorage();
-      // clear the text field with .reset in this class
-      
+      }      
     }
   
     reset() {
       // this function should reset the form / clear the text field
+      this.txtTodo.value = "";
     }
   }
   
