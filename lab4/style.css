@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Apercu";
-    src: url() format();
+    src: url(./font/Apercu\ Bold.otf) format("otf");
     }
 
 #ad {
