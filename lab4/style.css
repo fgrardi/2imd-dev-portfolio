@@ -1,13 +1,20 @@
 @font-face {
     font-family: "Apercu";
     src: url(./font/Apercu\ Bold.otf) format("otf");
-    }
+}
+
+body {
+    font-family: "Apercu";
+}
 
 #ad {
     width: 336px;
     height: 280px;
     background-color: #F2F4F6;
     border: 1px black solid;
+}
+
+#weather {
 }
 
 #logo img {
