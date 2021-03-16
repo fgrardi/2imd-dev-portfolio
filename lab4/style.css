@@ -1,3 +1,15 @@
-body {
-    background-color: red;
+@font-face {
+    font-family: "Apercu";
+    src: url() format();
+    }
+
+#ad {
+    width: 336px;
+    height: 280px;
+    background-color: #F2F4F6;
+    border: 1px black solid;
+}
+
+#logo img {
+    max-width: 40%;
 }
