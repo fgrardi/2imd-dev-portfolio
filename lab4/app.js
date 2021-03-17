@@ -29,7 +29,7 @@ class App {
             return response.json();
         })
         .then(data => {
-            console.log(data);
+            //console.log(data);
             this.weatherCondition = data.current.condition.code;
             
             let conditionText = data.current.condition.text;
@@ -69,13 +69,13 @@ class App {
             return response.json();
         })
         .then(data => {
+            //console.log(data);
             let sport = document.querySelector("#sport");
             let adImage = document.querySelector("#ad");
             
-            console.log(data);
             let gettingRandomSportImage = (data) => {
-
                 let result = {};
+
                 for (let i = 0; i < data.length; i++) {
                     let name = data[i].attributes.name;
                     //console.log(data[i].relationships.images.data[0].url);
