@@ -91,13 +91,13 @@ class App {
 
             if(this.weatherCondition === 1000 || (this.weatherCondition >= 1003 && this.weatherCondition <= 1030)) {
                 console.log("Outdoor");
-                sport.innerHTML = "outdoors";
+                sport.innerHTML = "an outdoor activity";
                 adImage.style.backgroundImage = `url(${weatherImages.outdoor})`;
 
             } 
             else if ((this.weatherCondition >= 1063 && this.weatherCondition <= 1207) || (this.weatherCondition >= 1210 && this.weatherCondition <= 1282)) {
                 console.log("Indoor");
-                sport.innerHTML = "indoors";
+                sport.innerHTML = "an indoor activity";
                 adImage.style.backgroundImage = `url(${weatherImages.indoor})`;
 
 
