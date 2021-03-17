@@ -57,10 +57,6 @@ class App {
         })
     }
 
-    getWeatherFromStorage(){
-
-    }
-
     getSport(){
         let url = `https://sports.api.decathlon.com/sports/recommendations/geolocation?coordinates=${this.lat},${this.lng}`;
 
