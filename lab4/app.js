@@ -31,22 +31,24 @@ class App {
         .then(data => {
             console.log(data);
             this.weatherCondition = data.current.condition.code;
+            
+            let conditionText = data.current.condition.text;
+            let sunny = (this.weatherCondition === 1000);
+            let cloudy = (this.weatherCondition >= 1003 && this.weatherCondition <= 1030);
+            let rainy = (this.weatherCondition >= 1063 && this.weatherCondition <= 1207);
+            let snowy = (this.weatherCondition >= 1210 && this.weatherCondition <= 1282);
 
-                if(this.weatherCondition === 1000) {
-                    console.log("Sunny");
-                    weather.innerHTML = "Get some sunscreen! It's a " + data.current.condition.text + "day.";
+                if(sunny) {
+                    weather.innerHTML = "Get some sunscreen! It's a " + conditionText + "day.";
                 } 
-                else if (this.weatherCondition >= 1003 && this.weatherCondition <= 1030) {
-                    console.log("Bewolkt");
-                    weather.innerHTML = "Take a sweater with you! It's " + data.current.condition.text;
+                else if (cloudy) {
+                    weather.innerHTML = "Take a sweater with you! It's " + conditionText;
                 } 
-                else if (this.weatherCondition >= 1063 && this.weatherCondition <= 1207) {
-                    console.log("Rainy");
-                    weather.innerHTML = "Get a raincoat! It's " + data.current.condition.text;
+                else if (rainy) {
+                    weather.innerHTML = "Get a raincoat! It's " + conditionText;
                 } 
-                else if (this.weatherCondition >= 1210 && this.weatherCondition <= 1282) {
-                    console.log("Snow");
-                    weather.innerHTML = "Get a coat! It's " + data.current.condition.text;
+                else if (snowy) {
+                    weather.innerHTML = "Get a coat! It's " + conditionText;
                 }
         })
         .catch(err => {
@@ -76,27 +78,25 @@ class App {
                 let result = {};
                 for (let i = 0; i < data.length; i++) {
                     let name = data[i].attributes.name;
-                    console.log(data[i].attributes.name);
-                    console.log(data[i].relationships.images.data[0].url);
+                    //console.log(data[i].relationships.images.data[0].url);
+                    
                     if(name === "Handball") {
                         result["indoor"] = data[i].relationships.images.data[0].url;
-                    } else if(name === "Rugby") {
+                    } 
+                    else if(name === "Rugby") {
                         result["outdoor"] = data[i].relationships.images.data[0].url;
                     }
                 }
                 return result;
             }
             let weatherImages = gettingRandomSportImage(data);
-            //console.log(weatherImages)
 
             if(this.weatherCondition === 1000 || (this.weatherCondition >= 1003 && this.weatherCondition <= 1030)) {
-                console.log("Outdoor");
                 sport.innerHTML = "an outdoor activity";
                 adImage.style.backgroundImage = `url(${weatherImages.outdoor})`;
 
             } 
             else if ((this.weatherCondition >= 1063 && this.weatherCondition <= 1207) || (this.weatherCondition >= 1210 && this.weatherCondition <= 1282)) {
-                console.log("Indoor");
                 sport.innerHTML = "an indoor activity";
                 adImage.style.backgroundImage = `url(${weatherImages.indoor})`;
 
