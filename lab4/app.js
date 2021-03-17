@@ -17,10 +17,12 @@ class App {
         this.lat = result.coords.latitude;
         this.lng = result.coords.longitude;
         this.getWeather();
+        this.getSport();
     }
 
     getWeather(){
-        let url = `https://api.weatherapi.com/v1/forecast.json?key=d6fab7ebcbfc48debf3161646211403&q=${this.lat},${this.lng}`
+        let url = `https://api.weatherapi.com/v1/forecast.json?key=d6fab7ebcbfc48debf3161646211403&q=${this.lat},${this.lng}`;
+        let weather = document.querySelector("#weather-condition");
 
         fetch(url)
         .then(response => {
@@ -28,17 +30,28 @@ class App {
         })
         .then(data => {
             console.log(data);
-            document.querySelector("#weather").innerHTML = "It's currently" + data.current.temp_c + "° outside.";
             this.weatherCondition = data.current.condition.code;
 
-            if(this.weatherCondition === 1003) {
-                console.log("Het is bewolkt");
-            } else {
-                console.log("iets anders")
-            }        })
+                if(this.weatherCondition === 1000) {
+                    console.log("Sunny");
+                    weather.innerHTML = "Get some sunscreen! It's a " + data.current.condition.text + "day.";
+                } 
+                else if (this.weatherCondition >= 1003 && this.weatherCondition <= 1030) {
+                    console.log("Bewolkt");
+                    weather.innerHTML = "Take a sweater with you! It's " + data.current.condition.text;
+                } 
+                else if (this.weatherCondition >= 1063 && this.weatherCondition <= 1207) {
+                    console.log("Rainy");
+                    weather.innerHTML = "Get a raincoat! It's " + data.current.condition.text;
+                } 
+                else if (this.weatherCondition >= 1210 && this.weatherCondition <= 1282) {
+                    console.log("Snow");
+                    weather.innerHTML = "Get a coat! It's " + data.current.condition.text;
+                }
+        })
         .catch(err => {
             err = "Couldn't load weather information";
-            document.querySelector("#weather").innerHTML = err;
+            weather.innerHTML = err;
         })
     }
 
@@ -47,24 +60,50 @@ class App {
     }
 
     getSport(){
-        let url = `https://sports.api.decathlon.com/sports/search/running?source=popular&coordinates=${this.lat},${this.lng}`;
+        let url = `https://sports.api.decathlon.com/sports/recommendations/geolocation?coordinates=${this.lat},${this.lng}`;
 
         fetch(url)
         .then(response => {
             return response.json();
         })
         .then(data => {
-            let image = document.querySelector("#sports");
-
-            if(data.length >= 1){
-                image.innerHTML = "sportkledij";
-                console.log("toon sportkledij om te kopen");
-            } else {
-                image.innerHTML = "reclame";
-                console.log("maak reclame voor meer te sporten");
-            }
+            let sport = document.querySelector("#sport");
+            let adImage = document.querySelector("#ad");
+            
             console.log(data);
+            let gettingRandomSportImage = (data) => {
+
+                let result = {};
+                for (let i = 0; i < data.length; i++) {
+                    let name = data[i].attributes.name;
+                    console.log(data[i].attributes.name);
+                    console.log(data[i].relationships.images.data[0].url);
+                    if(name === "Handball") {
+                        result["indoor"] = data[i].relationships.images.data[0].url;
+                    } else if(name === "Rugby") {
+                        result["outdoor"] = data[i].relationships.images.data[0].url;
+                    }
+                }
+                return result;
+            }
+            let weatherImages = gettingRandomSportImage(data);
+            //console.log(weatherImages)
+
+            if(this.weatherCondition === 1000 || (this.weatherCondition >= 1003 && this.weatherCondition <= 1030)) {
+                console.log("Outdoor");
+                sport.innerHTML = "outdoors";
+                adImage.style.backgroundImage = `url(${weatherImages.outdoor})`;
+
+            } 
+            else if ((this.weatherCondition >= 1063 && this.weatherCondition <= 1207) || (this.weatherCondition >= 1210 && this.weatherCondition <= 1282)) {
+                console.log("Indoor");
+                sport.innerHTML = "indoors";
+                adImage.style.backgroundImage = `url(${weatherImages.indoor})`;
+
+
+            }
         })
+
         .catch(err => {
             console.log(err);
         })
