@@ -1,21 +1,37 @@
 const getAll = (req, res) => {
-    res.send("GET messages");
+    res.json({
+        "message" : "GETTING messages"
+    })
 };
 
 const getId = (req, res) => {
-    res.send("GET messages with id ID");
+    const id = req.params.id;
+    res.json({
+        "message" : `GETTING message with id ${id}`,
+    })
 };
 
 const create = (req, res) => {
-    res.send("POSTING a new message for user Pickachu");
+    //res.send("POSTING a new message for user Pickachu");
+    const user = req.params.user;
+    res.json({
+        "message" : `POSTING a new message for user ${user}`
+    })
 };
 
 const update = (req, res) => {
-    res.send("UPDATING a message with id ID");
+    //res.send("UPDATING a message with id ID");
+    const id = req.params.id;
+    res.json({
+        "message" : `UPDATING a message with id ${id}`
+    })
 };
 
 const remove = (req, res) => {
-    res.send("DELETING a message with id ID");
+    const id = req.params.id;
+    res.json({
+        "message" : `DELETING a message with id ${id}`
+    })
 };
 
 module.exports.getAll = getAll;
