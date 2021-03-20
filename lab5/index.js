@@ -23,8 +23,8 @@ app.put('/api/v1/messages/:id', (req, res) => {
 });
 
 app.delete('/api/v1/messages/:id', (req, res) => {
-    res.send("DELETING a message with id ID")
-})
+    res.send("DELETING a message with id ID");
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
