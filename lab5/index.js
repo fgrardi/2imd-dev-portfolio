@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT || 3000;
 const messagesRouter = require('./routers/api/v1/messages');
 const pug = require('pug');
+
+app.use(cors());
 
 app.set('view engine', 'pug');
 app.get('/', (req, res) => res.render('index'));
